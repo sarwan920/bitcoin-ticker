@@ -15,12 +15,17 @@ Response.sendFile(path.normalize(__dirname+"/../src/index.html"));
 });
 
 app.post("/",(req,res)=>{
+
+    var crypto=req.body.crypto;
+    var fiat=req.body.fiat;
+    var baseURL="https://apiv2.bitcoinaverage.com/indices/global/ticker/"
+    var finalURL=baseURL+crypto+fiat;
     
-    request("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD",(error,Response,body)=>{
+    request(finalURL,(error,Response,body)=>{
 
     var data=JSON.parse(body);
     var price=data.last;
-    console.log(price);
+   res.send("price of "+crypto+" in  " +fiat+" is "+price);
 
     });
 
