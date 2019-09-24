@@ -18,7 +18,10 @@ app.post("/",(req,res)=>{
     
     request("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD",(error,Response,body)=>{
 
-console.log(body);
+    var data=JSON.parse(body);
+    var price=data.last;
+    console.log(price);
+
     });
 
 });
